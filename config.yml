@@ -1,0 +1,50 @@
+stages:
+  - name: "Source"
+    host: image-source
+    port: 8061
+    method: Get
+  - name: "Model"
+    host: yolo
+    port: 8061
+  - name: "Yolo2Homog"
+    host: traffic-routing
+    port: 8061
+    method: GetMiddlePt
+  - name: "ApplyHomog"
+    host: apply-homog
+    port: 8061  
+  - name: "Pts2Map"
+    host: traffic-routing
+    port: 8061
+    method: DrawOnMap
+  - name: "Visualization"
+    host: visualization
+    port: 8061
+links:
+  - source:
+      stage: "Source"
+    target:
+      stage: "Model"  
+  - source:
+      stage: "Model"
+    target:
+      stage: "Yolo2Homog"
+      field: "objects"
+  - source:
+      stage: "Source"
+    target:
+      stage: "Yolo2Homog"
+      field: "image"
+  - source:
+      stage: "Yolo2Homog"
+    target:
+      stage: "ApplyHomog"
+  - source:
+      stage: "ApplyHomog"
+    target:
+      stage: "Pts2Map"
+  - source:
+      stage: "Pts2Map"
+    target:
+      stage: "Visualization"
+      field: "objects"

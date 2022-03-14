@@ -8,7 +8,7 @@ services:
     image: sipgisr/camera-feed-grpc:latest
     environment: 
       CAMERA_URL: "ristmikud.tallinn.ee" 
-      REQUEST_URL: "/last/cam055.jpg"
+      REQUEST_URL: "/last/cam104.jpg"
       HTTPS: "True" 
   yolo:
     image: sipgisr/yolov5-grpc:latest
@@ -16,7 +16,7 @@ services:
     image: andrejfsantos/traffic-routing:latest
     volumes: 
     - type: bind
-      source: ./map_img.png
+      source: ./map_img_104.png
       target: /workspace/map_img.png
   apply-homog:
     image: andrejfsantos/vision-algorithms:latest

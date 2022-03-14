@@ -47,4 +47,3 @@ links:
       stage: "Pts2Map"
     target:
       stage: "Visualization"
-      field: "objects"
